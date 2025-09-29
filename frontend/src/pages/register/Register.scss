@@ -1,0 +1,15 @@
+﻿@import "../../styles/auth.scss";
+
+.auth--register {
+  .auth__card {
+    width: min(480px, 100%);
+  }
+
+  .auth__form {
+    margin-top: 1.25rem;
+  }
+
+  .auth__pill {
+    justify-content: space-between;
+  }
+}

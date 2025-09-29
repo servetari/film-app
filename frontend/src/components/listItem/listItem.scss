@@ -1,0 +1,228 @@
+﻿.listItem__link {
+  display: block;
+  scroll-snap-align: start;
+  color: inherit;
+  text-decoration: none;
+}
+
+.listItem {
+  position: relative;
+  height: 100%;
+  min-height: 260px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(12, 18, 34, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 28px 48px -32px rgba(5, 8, 25, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border var(--transition-base);
+  isolation: isolate;
+
+  &.is-hovered {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 35px 60px -25px rgba(8, 12, 32, 0.9);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  &:hover .listItem__glow {
+    opacity: 1;
+  }
+}
+
+.listItem__visual {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+
+  img,
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .listItem.is-hovered & img {
+    transform: scale(1.08);
+  }
+
+  video {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInVideo 0.4s ease forwards;
+  }
+}
+
+.listItem__glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 10, 20, 0.15) 0%, rgba(6, 10, 20, 0.92) 80%);
+  z-index: 2;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+
+.listItem__body {
+  position: relative;
+  z-index: 3;
+  padding: clamp(1.2rem, 2.2vw, 1.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.8vw, 0.9rem);
+}
+
+.listItem__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.listItem__title {
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.listItem__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.listItem__limit {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.listItem__description {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.listItem__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.listItem__genre {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.listItem__icons {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  opacity: 0.9;
+}
+
+.listItem__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid;
+  place-items: center;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: transform var(--transition-base), background var(--transition-base), border var(--transition-base);
+
+  svg {
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.16);
+  }
+}
+
+.listItem__favorite {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform var(--transition-base), background var(--transition-base), border var(--transition-base), color var(--transition-base);
+
+  svg {
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  &.is-active {
+    background: rgba(255, 76, 96, 0.18);
+    border-color: rgba(255, 76, 96, 0.45);
+    color: var(--color-primary);
+  }
+}
+
+@keyframes fadeInVideo {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .listItem.is-hovered .listItem__visual img {
+    filter: brightness(1.05);
+  }
+}
+
+@media (max-width: 768px) {
+  .listItem {
+    min-height: 240px;
+  }
+
+  .listItem__meta {
+    gap: 0.5rem;
+  }
+
+  .listItem__genre {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .listItem {
+    min-height: 220px;
+  }
+
+  .listItem__description {
+    -webkit-line-clamp: 2;
+  }
+}

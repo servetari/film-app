@@ -1,0 +1,135 @@
+﻿.list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-right: clamp(0rem, 4vw, 2rem);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 42px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--color-primary), rgba(255, 255, 255, 0));
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__arrow {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(15, 22, 45, 0.65);
+    color: var(--color-text);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform var(--transition-base), opacity var(--transition-base), border var(--transition-base);
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    svg {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__viewport {
+    position: relative;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: clamp(40px, 6vw, 80px);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    &::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--color-bg), rgba(5, 7, 15, 0));
+    }
+
+    &::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--color-bg), rgba(5, 7, 15, 0));
+    }
+  }
+
+  &__scroller {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(220px, clamp(240px, 19vw, 320px));
+    gap: clamp(1rem, 2.2vw, 1.75rem);
+    overflow-x: auto;
+    padding: 0 clamp(0.5rem, 3vw, 1.5rem) 1.25rem clamp(0.5rem, 3vw, 1.5rem);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    scroll-padding: 0 clamp(0.5rem, 3vw, 1.5rem);
+  }
+
+  &__scroller::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .list {
+    &__title::after {
+      width: 30px;
+    }
+
+    &__viewport::before,
+    &__viewport::after {
+      width: clamp(26px, 12vw, 46px);
+    }
+
+    &__scroller {
+      grid-auto-columns: minmax(200px, 65vw);
+      gap: clamp(0.75rem, 3vw, 1.25rem);
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .list {
+    &__scroller {
+      grid-auto-columns: 85vw;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+﻿.container {
+  display: flex;
+  align-items: stretch;
+  min-height: calc(100vh - 50px);
+  background: linear-gradient(145deg, rgba(8, 12, 24, 0.92), rgba(5, 8, 18, 0.86));
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
